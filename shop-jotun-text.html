@@ -1,149 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Shop - Painting with Love</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+    <!--body font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,328;1,328&display=swap" rel="stylesheet">
 
     <style>
-        body { 
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-        }
-        .brand-logo { 
-            width: 130px; 
-            height: 60px; 
-            object-fit: contain; 
-        }
-        /* product details*/
-        .product-card { 
-            width: 100%; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .product-media { 
-            height: 150px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 12px; 
-        }
-        .product-media img { 
-            max-height: 130px; 
-            object-fit: contain; 
-        }
-        .product-body { 
-            padding: 8px; 
-            flex: 1 1 auto; 
-        }
-        .product-footer { 
-            padding: 8px 10px 12px; 
-            background: #fff; 
-            border: 0; 
-        }
-        .brand-img { 
-            max-height: 60px; 
-        }
-        .breadcrumb { 
-            background: #f8f9fa; 
+        /* ========== THEME VARIABLES ========== */
+        :root{
+            --pw-deep-blue: #04132E;
+            --pw-navy: #335A80;
+            --pw-navy-nhat: #486d92;
+            --pw-navy-soft: #0F375B;
+            --pw-warm-white: #DFDFDF;
+            --pw-light-shell: #F4F4F2;
+            --pw-soft-grey: #B1B1AF;
+
+            --xanh-navy: var(--pw-navy);
+            --xanh-navy-dam: var(--pw-deep-blue);
+            --trang-nga: var(--pw-warm-white);
+            --be-xam-nhat: var(--pw-light-shell);
+            --go-be-am: var(--pw-soft-grey);
+
+            --jotun-imagine: #B9C9C2;
+            --jotun-eternal-marine: #D4E2DC;
+            --jotun-ice-poppy: #E6F2EC;
+
+            --pw-text: #0b1a2b;
+            --pw-muted: #516271;
+            --pw-border: rgba(4,19,46,.10);
+            --pw-shadow: 0 14px 32px rgba(4,19,46,.10);
+            --pw-shadow-soft: 0 10px 22px rgba(4,19,46,.08);
+            --pw-radius: 14px;
         }
 
-        /*image align*/
-        .carousel-narrow{
-            width: 100%;
-            max-width: 1800px;
-            margin-inline: auto;
+        /* ========== LAYOUT & BASE ========== */
+        html{ scroll-behavior: smooth; }
+        body{
+            font-family: 'Geom', sans-serif;
+            background: linear-gradient(180deg, var(--pw-light-shell) 0%, #ffffff 60%);
+            color: var(--pw-text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
         }
-        .carousel-narrow .carousel-inner {
+        a{ color: var(--pw-navy-soft); }
+        a:hover{ color: var(--xanh-navy-dam); }
+
+        /* ========== ADDRESS NAV ========== */
+        .address-nav{
+            background-color: var(--xanh-navy);
+            color: var(--trang-nga);
+            display:flex;
+            justify-content:space-between;
+            padding: .3rem 1rem;
+            height: 40px;
+            font-size: .9rem;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar{
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+            backdrop-filter: blur(6px);
+        }
+        .navbar .navbar-brand,
+        .navbar .nav-link{
+            color: var(--xanh-navy-dam) !important;
+            font-weight: 500;
+        }
+        .navbar .nav-link{
+            position: relative;
             overflow: hidden;
+            transition: color .25s ease;
+            padding: .45rem .65rem;
+            border-radius: 999px;
         }
-        .carousel-img {
-            height: 300px;
-            object-fit: cover;
+        .navbar .nav-link:hover{
+            background: rgba(51,90,128,.10);
+            color: var(--pw-navy-soft) !important;
         }
+
+        /* Brands / category navbar */
+        #brandsNavbar{
+            background: var(--pw-navy-nhat) !important;
+            border-bottom: 1px solid var(--pw-border) !important;
+        }
+        #brandsNavbar .nav-link{
+            color: #dedede !important;
+            border-radius: 999px;
+            padding: .4rem .65rem;
+        }
+        #brandsNavbar .nav-link:hover{
+            background: rgba(51,90,128,.10);
+            color: var(--pw-navy-soft) !important;
+        }
+        #brandsNavbar .btn-outline-primary{
+            border-color: rgba(191, 195, 198, 0.849);
+            color: var(--pw-navy-soft);
+        }
+        #brandsNavbar .btn-outline-primary:hover{
+            background: var(--pw-navy-soft);
+            border-color: var(--pw-navy-soft);
+            color: #fff;
+        }
+        #brandsNavbar #categoryDropdown {
+            background: var(--pw-navy-soft);
+            color: #fff;
+        }
+
+        /* ========== HEADER TEXT ========== */
+        header .display-5{
+            color: var(--xanh-navy-dam);
+            letter-spacing: .2px;
+        }
+        header .lead{
+            color: var(--pw-muted);
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* ========== SIDEBAR INTRO CARD ========== */
         .jotun-intro-card{
-            width: 100%;
-            /* allow the card to take full column width so it sits flush left */
+            border-radius: var(--pw-radius);
+            box-shadow: var(--pw-shadow-soft);
+            overflow: hidden;
             max-width: none;
             margin-bottom: 1.25rem;
-            position: static;
-            max-height: none;
-            overflow: hidden;
-            border-radius: .75rem;
         }
-
-        /* Logo header inside the card */
         .jotun-intro-card .logo-wrap{
             height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #07213a;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background: linear-gradient(180deg, var(--xanh-navy-dam), var(--pw-navy-soft));
             border-top-left-radius: .75rem;
             border-top-right-radius: .75rem;
             padding: 1rem;
         }
-        .jotun-intro-card .logo-wrap img{
-            max-height: 180px;
-            width: auto;
-            display: block;
-        }
+        .jotun-intro-card .logo-wrap img{ max-height: 180px; display:block; }
+        .jotun-intro-card .example-img{ width:100%; height:160px; object-fit:cover; display:block; }
+        .jotun-intro-card .card-body{ padding: 1rem 1rem .75rem; }
+        .jotun-intro-card .card-title{ color: var(--xanh-navy-dam); }
+        .jotun-intro-card .card-text{ color: var(--pw-muted) !important; }
+        .jotun-intro-card .list-group-item h6{ color: var(--xanh-navy-dam); }
+        .jotun-intro-card .list-group-item p{ color: var(--pw-muted) !important; }
+        .jotun-intro-card a.link-primary{ color: var(--pw-navy-soft) !important; }
+        .jotun-intro-card a.link-primary:hover{ color: var(--xanh-navy-dam) !important; text-decoration:underline !important; }
 
-        /* Example hero image inside card */
-        .jotun-intro-card .example-img{
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            display: block;
+        /* ========== PRODUCT CARDS ========== */
+        .product-card{
+            border:1px solid var(--pw-border);
+            border-radius: var(--pw-radius);
+            overflow:hidden;
+            box-shadow: 0 10px 18px rgba(4,19,46,.06);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            display:flex;
+            flex-direction:column;
         }
+        .product-card:hover{
+            transform: translateY(-6px);
+            box-shadow: var(--pw-shadow);
+            border-color: rgba(15,55,91,.20);
+        }
+        .product-media{ height:150px; display:flex; align-items:center; justify-content:center; padding:12px; background: linear-gradient(180deg, rgba(51,90,128,.10), rgba(244,244,242,.65)); }
+        .product-media img{ max-height:130px; object-fit:contain; }
+        .product-body{ padding:8px; flex:1 1 auto; }
+        .product-body h6{ color: var(--xanh-navy-dam); }
+        .product-body p{ color: var(--pw-muted) !important; }
+        .product-footer{ padding:8px 10px 12px; background:#fff; border:0; }
+        .product-footer .btn-outline-dark{
+            border-color: rgba(15,55,91,.25);
+            color: var(--pw-navy-soft);
+            border-radius: 10px;
+            transition: transform .2s ease, background-color .2s ease, color .2s ease;
+        }
+        .product-footer .btn-outline-dark:hover{
+            background: var(--pw-navy-soft);
+            border-color: var(--pw-navy-soft);
+            color:#fff;
+            transform: translateY(-1px);
+        }
+        .brand-img{ max-height:60px; }
 
-        .jotun-intro-card .card-body{
-            padding: 1rem 1rem 0.75rem;
+        /* ========== SEARCH & FILTER ========== */
+        form[role="search"] .form-control{
+            border-radius: 999px;
+            border: 1px solid var(--pw-border);
+            padding: .7rem 1rem;
+            box-shadow: none;
         }
-        .jotun-intro-card .list-group-item{
-            padding-left: 1rem;
-            padding-right: 1rem;
+        form[role="search"] .form-control:focus{
+            border-color: rgba(15,55,91,.35);
+            box-shadow: 0 0 0 .2rem rgba(51,90,128,.15);
         }
-        /* Small-screen tweaks: keep card neat and centered on mobile */
-        @media (max-width: 991.98px) {
-            .jotun-intro-card{
-                max-width: 420px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .jotun-intro-card .logo-wrap{ 
-                height: 110px; 
-                padding: .75rem; 
-            }
-            .jotun-intro-card .logo-wrap img{ max-height: 64px; }
-            .jotun-intro-card .example-img{ height: 200px; }
-            .jotun-intro-card .card-title{ font-size: 1.05rem; }
-            .jotun-intro-card .card-text{ font-size: .95rem; }
-            .jotun-intro-card .list-group-item{ padding-left: .75rem; padding-right: .75rem; }
+        form[role="search"] .btn{
+            border-radius: 999px;
+            border-color: rgba(15,55,91,.25);
+            color: var(--pw-navy-soft);
         }
-        @media (min-width: 992px) {
-            .product-media { height: 160px; }
-            .carousel-narrow { max-width: 100%; }
-            .carousel-img { height: 400px; }
-            /* sticky left sidebar on large screens */
+        form[role="search"] .btn:hover{
+            background: var(--pw-navy-soft);
+            border-color: var(--pw-navy-soft);
+            color: #fff;
+        }
+        .form-check-inline{ margin-right: .6rem; }
+        .form-check-input{ border-color: rgba(15,55,91,.35); }
+        .form-check-input:checked{ background-color: var(--pw-navy-soft); border-color: var(--pw-navy-soft); }
+        .form-check-label{ color: var(--pw-muted); }
+
+        /* ========== PAGINATION ========== */
+        .pagination .page-link{
+            border: 1px solid var(--pw-border);
+            color: var(--pw-navy-soft);
+            border-radius: 10px;
+            margin: 0 .2rem;
+        }
+        .pagination .page-item.active .page-link{
+            background: var(--pw-navy-soft);
+            border-color: var(--pw-navy-soft);
+            color: #fff;
+        }
+        .pagination .page-link:hover{ background: rgba(51,90,128,.10); }
+
+        /* ========== CAROUSEL / MISC ========== */
+        .carousel-narrow{ width:100%; max-width:1800px; margin-inline:auto; }
+        .carousel-narrow .carousel-inner{ overflow:hidden; }
+        .carousel-img{ height:300px; object-fit:cover; }
+        .breadcrumb{ background: transparent !important; }
+        .breadcrumb a{ color: var(--pw-navy-soft); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 991.98px){
+            .jotun-intro-card{ max-width:420px; margin-left:auto; margin-right:auto; }
+            .jotun-intro-card .logo-wrap{ height:110px; padding:.75rem; }
+            .jotun-intro-card .logo-wrap img{ max-height:64px; }
+            .jotun-intro-card .example-img{ height:200px; }
+            .jotun-intro-card .card-title{ font-size:1.05rem; }
+            .jotun-intro-card .card-text{ font-size:.95rem; }
+            .jotun-intro-card .list-group-item{ padding-left:.75rem; padding-right:.75rem; }
+        }
+        @media (min-width: 992px){
+            .product-media{ height:160px; }
+            .carousel-narrow{ max-width:100%; }
+            .carousel-img{ height:400px; }
             .jotun-intro-card{ position: sticky; top: 90px; align-self: start; }
         }
     </style>
 </head>
 <body>
+    <!-- ADDRESS NAV -->
+    <nav class="address-nav">
+        <div><p class="mb-0">0928 461 555</p></div>
+        <div><p class="mb-0">Address in Royal City</p></div>
+    </nav>
+
     <!-- MAIN NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainNavbar">
+    <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./public/img/logo.png" alt="logo" class="brand-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavCollapse" aria-controls="mainNavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#"><img src="./public/img/logo.png" alt="logo" width="130" height="60" class="brand-logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mainNavCollapse">
+
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-2">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
@@ -151,11 +283,13 @@
         </div>
     </nav>
 
-    <!-- BRAND / CATEGORY NAVBAR -->
+    <!-- BRANDS / CATEGORY NAV -->
     <nav class="navbar navbar-expand-lg bg-white border-bottom" id="brandsNavbar">
         <div class="container-fluid">
             <div class="btn-group">
-                <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Danh mục sản phẩm</button>
+                <button class="btn btn-light btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="categoryDropdown">
+                    Danh mục sản phẩm
+                </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Bột Bả & Chống Thấm</a></li>
                     <li><a class="dropdown-item" href="#">Sơn Lót Nội Ngoại Thất</a></li>
@@ -178,12 +312,12 @@
                     <li class="nav-item"><a class="nav-link" href="#">Jotun</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Bảng Giá</a></li>
                 </ul>
-                <button type="button" class="btn btn-outline-primary ms-3">Tra cứu đơn hàng</button>
+                <button type="button" class="btn btn-outline-primary ms-3" style="color: #fff;">Tra cứu đơn hàng</button>
             </div>
         </div>
     </nav>
 
-    <!-- BREADCRUMBS -->
+    <!-- BREADCRUMB -->
     <nav aria-label="breadcrumb" class="py-2 w-100 bg-light border-bottom">
         <div class="container">
             <ol class="breadcrumb rounded-3 mb-0 align-items-center">
@@ -193,7 +327,7 @@
         </div>
     </nav>
 
-    <!--HEADER - center-->
+    <!-- HEADER -->
     <header>
         <div class="container py-4 text-center">
             <h1 class="display-5 fw-bold">Jotun Paints</h1>
@@ -201,17 +335,16 @@
         </div>
     </header>
 
-    <!--BRAND INTRO - left-->
-        <main class="container py-5">
-          <div class="row">
-            <!-- Left: Brand intro sidebar -->
+    <!-- MAIN CONTENT -->
+    <main class="container py-5">
+        <div class="row">
+            <!-- SIDEBAR -->
             <aside class="col-lg-3 mb-4">
                 <div class="card shadow rounded-3 border-0 jotun-intro-card">
-                    <!-- Logo header -->
                     <div class="logo-wrap">
                         <img src="./public/img/jotun-logo-intro.png" alt="jotun logo">
                     </div>
-                    <!-- Intro -->
+
                     <div class="card-body">
                         <h4 class="card-title mb-2">Giới thiệu Jotun</h4>
                         <p class="card-text text-muted">
@@ -220,221 +353,100 @@
                             từ đó tạo nền tảng cho triết lý phát triển bền vững về sau.
                         </p>
                     </div>
-                    <!-- Big image -->
+
                     <img src="./public/img/jotun-example.webp" class="example-img" alt="jotun example">
-                    <!-- Key points -->
+
                     <ul class="list-group list-group-flush px-2">
-                    <li class="list-group-item border-0 px-4 py-3">
-                        <h6 class="mb-1">Hành trình phát triển toàn cầu</h6>
-                        <p class="mb-0 text-muted small">
-                        Từ một công ty có gốc rễ ở Bắc Âu, Jotun dần mở rộng ra nhiều thị trường và hiện hoạt động trên hơn 100 quốc gia.
-                        Quy mô toàn cầu cùng hệ thống sản xuất – phân phối rộng giúp Jotun đáp ứng đa dạng nhu cầu từ nhà ở đến công trình lớn.
-                        </p>
-                    </li>
-                    <li class="list-group-item border-0 px-4 py-3">
-                        <h6 class="mb-1">Lĩnh vực kinh doanh cốt lõi</h6>
-                        <p class="mb-0 text-muted small">
-                        Jotun tập trung vào ba lĩnh vực chính: Sơn hàng hải, Sơn công nghiệp và Sơn trang trí.
-                        Mỗi lĩnh vực đều có các dòng sản phẩm chuyên biệt, đáp ứng yêu cầu kỹ thuật và thẩm mỹ khác nhau.
-                        </p>
-                    </li>
-                    <li class="list-group-item border-0 px-4 py-3">
-                        <h6 class="mb-1">Thông điệp thương hiệu</h6>
-                        <p class="mb-0 text-muted small">
-                        “Sơn với tình yêu” thể hiện cam kết của Jotun trong việc cung cấp sản phẩm chất lượng cao,
-                        hướng đến trải nghiệm bền vững và giá trị lâu dài cho không gian sống.
-                        </p>
-                    </li>
+                        <li class="list-group-item border-0 px-4 py-3">
+                            <h6 class="mb-1">Hành trình phát triển toàn cầu</h6>
+                            <p class="mb-0 text-muted small">Từ một công ty có gốc rễ ở Bắc Âu, Jotun dần mở rộng ra nhiều thị trường và hiện hoạt động trên hơn 100 quốc gia. Quy mô toàn cầu cùng hệ thống sản xuất – phân phối rộng giúp Jotun đáp ứng đa dạng nhu cầu từ nhà ở đến công trình lớn.</p>
+                        </li>
+                        <li class="list-group-item border-0 px-4 py-3">
+                            <h6 class="mb-1">Lĩnh vực kinh doanh cốt lõi</h6>
+                            <p class="mb-0 text-muted small">Jotun tập trung vào ba lĩnh vực chính: Sơn hàng hải, Sơn công nghiệp và Sơn trang trí. Mỗi lĩnh vực đều có các dòng sản phẩm chuyên biệt, đáp ứng yêu cầu kỹ thuật và thẩm mỹ khác nhau.</p>
+                        </li>
+                        <li class="list-group-item border-0 px-4 py-3">
+                            <h6 class="mb-1">Thông điệp thương hiệu</h6>
+                            <p class="mb-0 text-muted small">“Sơn với tình yêu” thể hiện cam kết của Jotun trong việc cung cấp sản phẩm chất lượng cao, hướng đến trải nghiệm bền vững và giá trị lâu dài cho không gian sống.</p>
+                        </li>
                     </ul>
-                    <!-- Link -->
+
                     <div class="card-body px-4 pt-2">
-                    <a href="#" class="link-primary text-decoration-none fw-semibold">
-                        Xem thêm về Jotun →
-                    </a>
+                        <a href="#" class="link-primary text-decoration-none fw-semibold">Xem thêm về Jotun →</a>
                     </div>
                 </div>
             </aside>
 
-            <!-- Right Column: Collections, Color Palette, and Products -->
-            <!--1st collection-->
+            <!-- RIGHT COLUMN -->
             <section class="col-lg-9">
                 <div class="mb-5">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h2 class="h2 mb-0">Bộ sư tập màu Jotun</h2>
                         <small class="text-muted"><a href="https://www.jotun.com/vn-vi/decorative/interior/colours/colourcards/our-most-beautiful-colours">Xem tất cả màu sắc</a></small>
                     </div>
-                    <div>
-                        <p>Bộ sưu tập “Sắc Màu Đẹp Nhất Từ Jotun 2025” gồm 128 màu được tuyển chọn, giúp bạn dễ dàng phối màu theo phong cách riêng và hình dung sự kết hợp hài hòa cho ngôi nhà mơ ước. 
-                            Bảng màu gợi ý dựa trên các lý thuyết màu sắc để tạo cảm hứng lâu dài. Bạn cũng có thể đến đại lý Jotun gần nhất để xem mẫu màu lớn, 
-                            được tư vấn bởi chuyên gia và thi công bằng sơn thật để đảm bảo màu sắc trung thực.</p>
-                    </div>
+                    <p>Bộ sưu tập “Sắc Màu Đẹp Nhất Từ Jotun 2025” gồm 128 màu được tuyển chọn, giúp bạn dễ dàng phối màu theo phong cách riêng và hình dung sự kết hợp hài hòa cho ngôi nhà mơ ước. Bảng màu gợi ý dựa trên các lý thuyết màu sắc để tạo cảm hứng lâu dài. Bạn cũng có thể đến đại lý Jotun gần nhất để xem mẫu màu lớn, được tư vấn bởi chuyên gia và thi công bằng sơn thật để đảm bảo màu sắc trung thực.</p>
                 </div>
-                <!-- COLLECTIONS -->
+
+                <!-- Collections and palettes -->
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h2 class="h5 mb-0">Chốn nuôi dưỡng tâm hồn</h2>
                         <small class="text-muted"><a href="https://www.jotun.com/vn-vi/decorative/interior/colours/colourcards/new-jotun-colour-chart">Explore categories</a></small>
                     </div>
                     <div class="content">
-                        <p>Phủ lên không gian sống những gam màu phản chiếu cá tính và đam mê của chính bạn để nhà 
-                            không còn là nơi để ở mà con là nơi mang lại sự bình yên và nguồn năng lượng tích cực cho tâm hồn bạn.</p>
+                        <p>Phủ lên không gian sống những gam màu phản chiếu cá tính và đam mê của chính bạn để nhà không còn là nơi để ở mà con là nơi mang lại sự bình yên và nguồn năng lượng tích cực cho tâm hồn bạn.</p>
                     </div>
                 </div>
 
-                <!-- JOTUN COLOR PALETTE -->
                 <div class="mb-3">
                     <h6 class="h6 mb-3">Các màu nổi bật</h6>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
-
-                        <!-- Pink Ambience -->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#CFAF9C;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">20362</small>
-                                    <h5 class="mb-0">Pink Ambience</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Sophisticated Red -->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#7B5953;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">2951</small>
-                                    <h5 class="mb-0">Sophisticated Red</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Northern Mystic -->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#696D61;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">7613</small>
-                                    <h5 class="mb-0">Northern Mystic</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Iconic-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#A1ABA6;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">6378</small>
-                                    <h5 class="mb-0">Iconic</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Olive-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#B8A87F;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">8284</small>
-                                    <h5 class="mb-0">Olive</h5>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#CFAF9C;"></div><div class="card-body px-0 pt-3"><small class="text-muted">20362</small><h5 class="mb-0">Pink Ambience</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#7B5953;"></div><div class="card-body px-0 pt-3"><small class="text-muted">2951</small><h5 class="mb-0">Sophisticated Red</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#696D61;"></div><div class="card-body px-0 pt-3"><small class="text-muted">7613</small><h5 class="mb-0">Northern Mystic</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#A1ABA6;"></div><div class="card-body px-0 pt-3"><small class="text-muted">6378</small><h5 class="mb-0">Iconic</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#B8A87F;"></div><div class="card-body px-0 pt-3"><small class="text-muted">8284</small><h5 class="mb-0">Olive</h5></div></div></div>
                     </div>
                 </div>
 
-                <!-- COLLECTIONS -->
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h2 class="h5 mb-0">Sắc Màu của Cảm Xúc</h2>
                         <small class="text-muted"><a href="https://www.jotun.com/vn-vi/decorative/interior/colours/colourcards/jotun-colour-collection-2025">Explore categories</a></small>
                     </div>
                     <div class="content">
-                        <p>Vẻ đẹp đích thực không đến từ những điều lớn lao, mà khéo léo tỏa sáng trong từng khoảnh khắc. Màu sắc cũng không ngoại lệ. 
-                            Sắc Màu Cảm Xúc 2025 của Jotun không chỉ tôn vinh sức mạnh của sự tinh tế mà còn phá cách với những điểm nhấn táo bạo.</p>
+                        <p>Vẻ đẹp đích thực không đến từ những điều lớn lao, mà khéo léo tỏa sáng trong từng khoảnh khắc. Màu sắc cũng không ngoại lệ. Sắc Màu Cảm Xúc 2025 của Jotun không chỉ tôn vinh sức mạnh của sự tinh tế mà còn phá cách với những điểm nhấn táo bạo.</p>
                     </div>
                 </div>
 
-                <!-- JOTUN COLOR PALETTE -->
                 <div class="mb-3">
                     <h6 class="h6 mb-3">Các màu nổi bật</h6>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
-
-                        <!--Cashew-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#E3DDCD;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">1931</small>
-                                    <h5 class="mb-0">Cashew</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Malmo-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#E4DCBC;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">8124</small>
-                                    <h5 class="mb-0">Malmo</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Adventure-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#A38269;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">11175</small>
-                                    <h5 class="mb-0">Adventure</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Muted Coral-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#BB7D69;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">20217</small>
-                                    <h5 class="mb-0">Muted Coral</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Free Spirit-->
-                        <div class="col">
-                            <div class="card border-0">
-                                <div class="rounded-3" style="height: 240px; background:#6B7E7E;"></div>
-                                <div class="card-body px-0 pt-3">
-                                    <small class="text-muted">5489</small>
-                                    <h5 class="mb-0">Free Spirit</h5>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#E3DDCD;"></div><div class="card-body px-0 pt-3"><small class="text-muted">1931</small><h5 class="mb-0">Cashew</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#E4DCBC;"></div><div class="card-body px-0 pt-3"><small class="text-muted">8124</small><h5 class="mb-0">Malmo</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#A38269;"></div><div class="card-body px-0 pt-3"><small class="text-muted">11175</small><h5 class="mb-0">Adventure</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#BB7D69;"></div><div class="card-body px-0 pt-3"><small class="text-muted">20217</small><h5 class="mb-0">Muted Coral</h5></div></div></div>
+                        <div class="col"><div class="card border-0"><div class="rounded-3" style="height:240px;background:#6B7E7E;"></div><div class="card-body px-0 pt-3"><small class="text-muted">5489</small><h5 class="mb-0">Free Spirit</h5></div></div></div>
                     </div>
                 </div>
-                </div>
             </section>
-            </div>
-        </main>
+        </div>
+    </main>
 
-        <!--all the products:))-->
-        <main class="container py-3">
+    <!-- PRODUCTS / SEARCH -->
+    <main class="container py-3">
         <div class="row g-6">
-            <!-- Products Section (Left) -->
             <section class="col">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h2 class="h5 mb-0">Featured Products</h2>
                 </div>
-                <!--radio for categories and search-->
+
                 <div class="mb-4">
                     <form class="d-flex mb-4" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                         <label class="form-check-label" for="inlineRadio1">Sơn Công Nghiệp</label>
@@ -444,13 +456,14 @@
                         <label class="form-check-label" for="inlineRadio2">Sơn Nội Thất</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Sơn Ngoại Thất</label>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Sơn Ngoại Thất</label>
                     </div>
                 </div>
-                <!--products-->
+
                 <div>
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 product-grid">
+                        <!-- Repeatable product card -->
                         <div class="col d-flex">
                             <article class="card text-center shadow-sm product-card w-100">
                                 <div class="product-media"><img src="./public/img/product-1.png" class="img-fluid" alt="Product 1"></div>
@@ -507,7 +520,10 @@
             </section>
         </div>
     </main>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
 </body>
 </html>

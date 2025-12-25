@@ -1,25 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Painting with Love - Jotun Paint</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,328;1,328&display=swap" rel="stylesheet">
+
     <style>
-        /* ===== CSS VARIABLES ===== */
+        /*color variables tho */
         :root {
+            /* core palette */
+            --pw-deep-blue: #04132E;
+            --pw-navy: #335A80;
+            --pw-navy-nhat: #486d92;
+            --pw-navy-soft: #0F375B;
+            --pw-warm-white: #DFDFDF;
+            --pw-light-shell: #F4F4F2;
+            --pw-soft-grey: #B1B1AF;
+
+            /* aliases used across the stylesheet */
+            --xanh-navy: var(--pw-navy);
+            --xanh-navy-dam: var(--pw-deep-blue);
+            --trang-nga: var(--pw-warm-white);
+            --be-xam-nhat: var(--pw-light-shell);
+            --go-be-am: var(--pw-soft-grey);
+
+            /* jotun accents */
             --jotun-imagine: #B9C9C2;
             --jotun-eternal-marine: #D4E2DC;
             --jotun-ice-poppy: #E6F2EC;
+
+            /* utility / UI tokens */
+            --pw-text: #0b1a2b;
+            --pw-muted: #516271;
+            --pw-border: rgba(4,19,46,.10);
+            --pw-shadow: 0 14px 32px rgba(4,19,46,.10);
+            --pw-shadow-soft: 0 10px 22px rgba(4,19,46,.08);
+            --pw-radius: 14px;
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== BASE ===== */
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Geom', sans-serif;
+            background: linear-gradient(180deg, var(--pw-light-shell) 0%, #ffffff 60%);
+            color: var(--pw-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: var(--pw-navy-soft); }
+        a:hover { color: var(--xanh-navy-dam); }
+
+        /* ===== TOP BARS / NAV ===== */
+        .address-nav {
+            background-color: var(--xanh-navy);
+            color: var(--trang-nga);
+            display: flex;
+            justify-content: space-between;
+            padding: .3rem 1rem;
+            height: 35px;
+            font-size: .8rem;
+            border-radius: 5px;
+        }
+
+        .navbar {
+            background-color: var(--be-xam-nhat);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
+        }
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            color: var(--xanh-navy-dam) !important;
+            font-weight: 500;
+        }
+        .navbar .nav-link { transition: color .22s ease; }
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus { color: var(--pw-navy-soft) !important; }
+
+        /* hero */
         .hero-header {
             position: relative;
-            width: 100%;
-            min-height: 70vh;
+            width: min(1370px, 98%);
+            margin: 1.25rem auto;
             overflow: hidden;
-            border-radius: 6px;
+            height: 1020px;
+            border-radius: 12px;
+            background: var(--trang-nga);
         }
 
         .hero-bg {
@@ -28,161 +103,316 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: 50% 18%;
             z-index: 1;
+            display: block;
+            transition: transform 4s ease-out;
         }
+        .hero-header:hover .hero-bg { transform: scale(1.02); }
 
         .hero-content {
-            position: relative;
-            z-index: 3;
-            height: 100%;
-            padding: 4rem 3.5rem;
-            max-width: 520px;
-            color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 28%;
+            transform: translate(-50%, -32%);
+            z-index: 2;
+            max-width: 720px;
+            width: calc(100% - 4rem);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
-            gap: 1.1rem;
+            align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
         }
 
         .hero-title {
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: .5px;
             line-height: 1.05;
             font-size: clamp(2.2rem, 4vw, 3.4rem);
-            margin: 0;
         }
 
         .hero-line {
             width: 90px;
             height: 3px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255,255,255,.9);
             display: inline-block;
             border-radius: 2px;
+            margin: .6rem 0 .8rem;
         }
 
-        .hero-sub {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 0.98rem;
-        }
+        .hero-sub { margin: 0 0 1.4rem; opacity: .95; font-size: .98rem; }
 
         .hero-btn {
             border: 0;
             font-weight: 700;
-            padding-left: 1.4rem;
-            padding-right: 1.4rem;
+            padding: .65rem 1.4rem;
+            background-color: var(--pw-warm-white);
+            color: var(--xanh-navy-dam);
+        }
+        .hero-btn:hover,
+        .hero-btn:focus {
+            background-color: #fff;
+            color: var(--xanh-navy-dam);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(0,0,0,.12);
         }
 
-        /* ===== FEATURE BOX STYLES ===== */
-        .feature-box {
-            background: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 10px;
-            padding: 22px 18px;
-            margin: 10px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+        .why-choose_us h2{
+          color: var(--pw-deep-blue);
+          font-weight: 900;
+          letter-spacing: .3px;
         }
 
-        .feature-box p {
-            margin: 0;
-            line-height: 1.6;
-            font-size: 0.98rem;
-            color: #333;
+        .why-choose_us .text-muted{
+          color: var(--pw-muted) !important;
         }
 
-        .feature-box:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.10);
-            border-color: rgba(0, 0, 0, 0.14);
+        /* according wrap*/
+        #accordionWhyChoose{
+          width: min(920px, 92%) !important;
         }
 
-        /* ===== ACCORDION STYLES (Why Choose Us) ===== */
-        .why-choose-us .accordion-button.collapsed {
-            background-color: var(--jotun-eternal-marine);
-            color: #0f2a22;
+        /* accordion item = card */
+        #accordionWhyChoose .accordion-item{
+          border: 1px solid var(--pw-border);
+          border-radius: var(--pw-radius);
+          overflow: hidden;
+          background: #fff;
+          box-shadow: 0 10px 22px rgba(4,19,46,.06);
+          transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+          margin-bottom: 14px;
         }
 
-        .why-choose-us .accordion-button.collapsed:hover {
-            filter: brightness(0.98);
+        #accordionWhyChoose .accordion-item:hover{
+          transform: translateY(-4px);
+          box-shadow: 0 16px 34px rgba(4,19,46,.12);
+          border-color: rgba(15,55,91,.20);
         }
 
-        .why-choose-us .accordion-button:not(.collapsed) {
-            background-color: var(--jotun-imagine);
-            color: #0f2a22;
-            box-shadow: none;
+        /* button accordion */
+        #accordionWhyChoose .accordion-button{
+          background: rgba(244,244,242,.85);
+          padding: 1.05rem 1.1rem;
+          box-shadow: none;
+          border-bottom: 1px solid rgba(4,19,46,.06);
+          transition: background-color .2s ease, color .2s ease;
         }
 
-        .why-choose-us .accordion-button:not(.collapsed)::after {
-            filter: brightness(0) saturate(100%) invert(13%) sepia(9%) saturate(1200%) hue-rotate(110deg) brightness(90%) contrast(90%);
+        /* khi mở */
+        #accordionWhyChoose .accordion-button:not(.collapsed){
+          background: rgba(51,90,128,.12);
+          color: var(--pw-deep-blue);
         }
 
-        .why-choose-us .accordion-body {
-            background-color: #d2ded8;
-            border-radius: 0 0 8px 8px;
+        /* the narrow icon */
+        #accordionWhyChoose .accordion-button::after{
+          transform: scale(1.05);
+          filter: brightness(0) saturate(100%) invert(14%) sepia(18%) saturate(600%)
+                  hue-rotate(180deg) brightness(90%) contrast(92%);
         }
 
-        .why-choose-us .accordion-item {
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 10px;
+        /* body (reasons) */
+        #accordionWhyChoose .accordion-body{
+          background: #fff;
+          padding: 1.1rem 1.1rem 1.2rem;
         }
 
-        .why-choose-us .accordion-button {
-            border-radius: 10px 10px 0 0;
+        #accordionWhyChoose .accordion-body p{
+          color: var(--pw-muted);
+          line-height: 1.75;
+          font-size: 0.98rem;
         }
 
-        /* ===== SECTION PADDING ===== */
-        .muc-tieu {
-            padding: 1rem 0 2rem 0;
+        /* img hover */
+        .why-img{
+          border-radius: 16px !important;
+          box-shadow: 0 14px 30px rgba(4,19,46,.12) !important;
+          border: 1px solid rgba(4,19,46,.08);
+          transition: transform .28s ease, box-shadow .28s ease;
         }
 
-        .su-menh-jotun {
-            padding: 1rem 0 2rem 0;
+        #accordionWhyChoose .accordion-item:hover .why-img{
+          transform: scale(1.02);
+          box-shadow: 0 18px 42px rgba(4,19,46,.18) !important;
         }
 
-        /* ===== IMAGE STYLES ===== */
-        .why-img {
-            max-width: 100%;
-            height: auto;
+        #accordionWhyChoose .row{
+          align-items: center;
+        }
+        #accordionWhyChoose .col-lg-6{
+          padding-top: .25rem;
+          padding-bottom: .25rem;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
+        @media (max-width: 991.98px){
+          #accordionWhyChoose .accordion-body{
+            padding: .95rem;
+          }
+          .why-img{
+            border-radius: 14px !important;
+          }
+        }
+
+        /* mission and goals */
+        .jotun-mission-goals{
+          position: relative;
+          color: var(--trang-nga);
+          background:
+            radial-gradient(900px 260px at 18% 0%, rgba(223,223,223,.14), transparent 60%),
+            radial-gradient(700px 220px at 85% 25%, rgba(51,90,128,.18), transparent 55%),
+            linear-gradient(180deg, var(--xanh-navy) 0%, var(--xanh-navy-dam) 100%);
+          border-top: 1px solid rgba(223,223,223,.12);
+          border-bottom: 1px solid rgba(223,223,223,.10);
+          margin: 0;
+          border-radius: 10px;
+          width: 95%;
+          margin: 1.25rem auto;
+        }
+
+        .jotun-mission-goals .section-title{
+          font-weight: 900;
+          letter-spacing: .4px;
+        }
+
+        .jotun-mission-goals .section-sub{
+          color: rgba(223,223,223,.88);
+        }
+
+        .jotun-mission-goals .block-head{
+          display:flex;
+          align-items:center;
+          gap: 14px;
+          margin-bottom: 18px;
+        }
+
+        .jotun-mission-goals .block-title{
+          margin:0;
+          font-weight: 900;
+          color: var(--trang-nga);
+        }
+
+        .jotun-mission-goals .block-line{
+          height: 2px;
+          flex: 1 1 auto;
+          background: linear-gradient(90deg, rgba(223,223,223,.45), transparent);
+          border-radius: 999px;
+        }
+
+        .jotun-mission-goals .info-card{
+          position: relative;
+          background: rgba(244,244,242,.94);
+          color: #1f2f44;
+          border: 1px solid rgba(223,223,223,.30);
+          border-radius: 16px;
+          padding: 18px 16px;
+          box-shadow: 0 14px 32px rgba(4,19,46,.18);
+          overflow: hidden;
+          transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        }
+
+        .jotun-mission-goals .info-card::before{
+          content:"";
+          position:absolute;
+          inset:-2px;
+          background: radial-gradient(600px 180px at 20% 10%, rgba(51,90,128,.18), transparent 60%);
+          opacity: .85;
+          pointer-events:none;
+        }
+
+        .jotun-mission-goals .info-card:hover{
+          transform: translateY(-6px);
+          box-shadow: 0 22px 46px rgba(4,19,46,.24);
+          border-color: rgba(223,223,223,.55);
+        }
+
+        .jotun-mission-goals .info-card p{
+          margin:0;
+          line-height: 1.75;
+          font-size: 0.98rem;
+          color: #24364b;
+          padding-right: 54px;
+          position: relative;
+        }
+
+        .jotun-mission-goals .info-badge{
+          position:absolute;
+          top: 14px;
+          right: 14px;
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-weight: 900;
+          letter-spacing: .5px;
+          background: rgba(51,90,128,.12);
+          border: 1px solid rgba(15,55,91,.18);
+          color: var(--xanh-navy-dam);
+        }
+
+        @media (max-width: 768px){
+          .jotun-mission-goals .info-card{
+            padding: 16px 14px;
+          }
+          .jotun-mission-goals .info-card p{
+            font-size: .96rem;
+          }
+        }
+
+        footer { background-color: var(--xanh-navy); color:#DFDFDE; }
+
+        @media (max-width: 992px){
+            .hero-header { height: 420px; }
             .hero-content {
-                padding: 2.5rem 1.5rem;
-                max-width: 100%;
+                top: 28%;
+                transform: translate(-50%, -28%);
+                padding: 0 1.25rem;
+                width: calc(100% - 2.5rem);
             }
-
-            .hero-header {
-                min-height: 60vh;
+            .jotun-mission-goals{ width: 96%; }
+        }
+        @media (max-width: 768px){
+            .hero-header { height: 320px; border-radius: 8px; }
+            .hero-content {
+                top: 22%;
+                transform: translate(-50%, -22%);
+                padding: 1rem 1rem;
+                width: calc(100% - 2rem);
             }
+            #accordionWhyChoose .accordion-body{ padding: .95rem; }
+            .why-img{ border-radius: 14px !important; }
         }
     </style>
 </head>
+
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+    <!-- ADDRESS NAV -->
+    <nav class="address-nav">
+        <div><p class="mb-0">0928 461 555</p></div>
+        <div><p class="mb-0">Address in Royal City</p></div>
+    </nav>
+
+    <!-- MAIN NAVBAR -->
+    <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="./public/img/logo.png" alt="logo"  width="130" height="60"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#"><img src="./public/img/new-logo.svg" alt="logo" width="130" height="60"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-2">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -190,27 +420,14 @@
 
     <!-- HERO HEADER -->
     <header class="hero-header">
-        <img class="hero-bg" src="./public/img/header.png" alt="Header image" />
+        <img class="hero-bg" src="./public/img/new-header.png" alt="Header image" />
         <div class="hero-content">
-            <h1 class="hero-title">
-            Painting <br />
-            with Love
-            </h1>
-
+            <h1 class="hero-title">Painting with Love</h1>
             <span class="hero-line"></span>
-
-            <p class="hero-sub">
-            Each story represented by their color. <br />
-            Choose your own story
-            </p>
+            <p class="hero-sub">Each story represented by their color. Choose your own story.</p>
 
             <div class="btn-group">
-                <button
-                    class="btn btn-light btn-lg dropdown-toggle hero-btn"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
+                <button class="btn btn-light btn-lg dropdown-toggle hero-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     SHOP NOW
                 </button>
                 <ul class="dropdown-menu">
@@ -224,19 +441,18 @@
         </div>
     </header>
 
-    
-    <!-- WHY CHOOSE US SECTION -->
-    <section class="why-choose-us py-5" style="background-color: var(--jotun-ice-poppy);">
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose_us py-5">
         <div class="text-center mb-5">
             <h2>TẠI SAO CHỌN JOTUN?</h2>
             <p class="text-muted">3 lý do nổi bật giúp bạn yên tâm khi lựa chọn.</p>
         </div>
 
         <div class="accordion w-75 mx-auto my-4" id="accordionWhyChoose">
-            <!-- Reason 1: Color & Durability -->
+            <!-- Reason 1 -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true">
                         Màu đẹp, bền lâu
                     </button>
                 </h2>
@@ -244,25 +460,24 @@
                     <div class="accordion-body">
                         <div class="row align-items-center g-3">
                             <div class="col-12 col-lg-6">
-                                <p class="mb-0">
-                                    Sơn cho bề mặt phủ mịn, độ che phủ tốt nên màu lên tường đều, hạn chế loang lổ
+                                <p class="mb-0">Sơn cho bề mặt phủ mịn, độ che phủ tốt nên màu lên tường đều, hạn chế loang lổ
                                     và sát với bảng màu khách đã chọn. Công nghệ màu giúp hạn chế phai màu, ngả vàng
                                     hay xỉn khi gặp nắng, ẩm hoặc khói bụi, nên tường giữ được vẻ đẹp lâu hơn và không
                                     phải sơn lại quá thường xuyên.
                                 </p>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <img src="./public/img/jotun-reason-1.webp" class="img-fluid rounded-3 shadow-sm why-img" alt="Jotun color durability" />
+                                <img src="./public/img/jotun-reason-1.jpeg" class="img-fluid rounded-3 shadow-sm why-img" alt="Jotun color durability" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Reason 2: Safety & Easy Clean -->
+            <!-- Reason 2 -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false">
                         An toàn và dễ vệ sinh
                     </button>
                 </h2>
@@ -277,17 +492,17 @@
                                 </p>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <img src="./public/img/jotun-2.webp" class="img-fluid rounded-3 shadow-sm why-img" alt="Jotun safe and easy clean" />
+                                <img src="./public/img/Jotun-2.jpg" class="img-fluid rounded-3 shadow-sm why-img" alt="Jotun safe and easy clean" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Reason 3: Interior Matching & Support -->
+            <!-- Reason 3 -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false">
                         Dễ phối nội thất, dịch vụ hỗ trợ tốt
                     </button>
                 </h2>
@@ -312,73 +527,95 @@
         </div>
     </section>
 
+    <!-- MISSION + OBJECTIVES -->
+    <section class="jotun-mission-goals py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title mb-2">SỨ MỆNH & MỤC TIÊU</h2>
+                <p class="section-sub mb-0">Cam kết bền vững và định hướng phát triển của Jotun.</p>
+            </div>
 
-    <!-- MISSION SECTION -->
-    <section class="su-menh-jotun" style="background-color: #EDEFE5;">
-        <div class="text-center mb-5">
-            <h2>SỨ MỆNH JOTUN</h2>
-        </div>
-        <div class="container py-4">
-            <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-4 text-center features">
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Luôn tìm ra những giải pháp hiệu quả nhất về chất phủ bề mặt cho các công trình dân dụng và công cộng phù hợp với mọi yêu cầu cầu của khách hàng.</p>
+            <div class="block">
+                <div class="block-head mb-4">
+                    <h3 class="block-title">Sứ mệnh Jotun</h3>
+                    <span class="block-line"></span>
+                </div>
+
+                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">Luôn tìm ra những giải pháp hiệu quả nhất về chất phủ bề mặt cho các công trình dân dụng và công cộng phù hợp với mọi yêu cầu cầu của khách hàng.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">Gia tăng giá trị bền vững và thẩm mỹ cho các công trình, làm đẹp cho cuộc đời thông qua mỗi cm2 bề mặt công trình hoàn thiện.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">Nâng cao hiệu quạ sử dụng đồng tiền cho mỗi người dân dùng sản phẩm sơn và chất chống thấm.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Gia tăng giá trị bền vững và thẩm mỹ cho các công trình, làm đẹp cho cuộc đời thông qua mỗi cm2 bề mặt công trình hoàn thiện.</p>
-                    </div>
+            </div>
+
+            <div class="my-5"></div>
+
+            <div class="block">
+                <div class="block-head mb-4">
+                    <h3 class="block-title">Mục tiêu</h3>
+                    <span class="block-line"></span>
                 </div>
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Nâng cao hiệu quả sử dụng đồng tiền cho mỗi người dân dùng sản phẩm sơn và chất chống thấm.</p>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">
+                            Không ngừng cải tiến công nghệ, nâng cao năng suất và chất lượng sản phẩm ở mức cao nhất, phù hợp với tính nhiệt đới hóa ở Châu Á
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">
+                            Trở thành một đơn vị hàng đầu về những sản phẩm sơn và chất thấm thông minh, luôn tìm tòi những giải pháp mới mang tính đột phá để sản xuất ra những sản phẩm đa năng.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">
+                            Luôn hướng tới khách hàng: Đặt lợi ích của khách hàng và những đối tác lên hàng đầu thông qua các chính sách mềm dẻo, linh hoạt, hài hòa.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="info-card h-100">
+                            <p class="mb-0">
+                            Hợp tác, chia sẻ, tin cậy: Xây dựng môi trường làm việc chuyên nghiệp biết lắng nghe và thấu hiểu khách hàng.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- OBJECTIVES SECTION -->
-    <section class="muc-tieu" style="background-color: #f8f2dc;">
-        <div class="text-center mb-5">
-            <h2>MỤC TIÊU</h2>
-        </div>
-        <!--content-->
-        <div class="container py-4">
-            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 text-center features">
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Không ngừng cải tiến công nghệ, nâng cao năng suất và chất lượng sản phẩm ở mức cao nhất, phù hợp với tính nhiết đới hóa ở Châu Á</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Trở thành một đơn vị hàng đầu về những sản phẩm sơn và chất thấm thông minh , luôn tìm tòi những giải pháp mới mang tính đột phá để sản xuất ra những sản phẩm đa năng.</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Luôn hướng tới khách hàng: Đặt lợi ích của khách hàng và những đối tác lên hàng đầu thông qua các chính sách mềm dẻo, linh hoạt, hài hòa.</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="feature-box h-100">
-                        <p>Hợp tác, chia sẽ, tin cậy: Xây dựng môi trường làm việc chuyên nghiệp biết lắng nghe và thấu hiểu khách hàng.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CAROUSEL SECTION -->
+    <!-- CAROUSEL -->
     <section class="py-5">
         <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide mx-auto carousel-narrow" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
                 </div>
                 <div class="carousel-inner rounded-3 shadow-sm">
                     <div class="carousel-item active">
@@ -402,11 +639,14 @@
             </div>
         </div>
     </section>
+
     <!-- FOOTER -->
-    <footer class="py-4 bg-light text-center border-top mt-5">
+    <footer class="py-4 text-center border-top mt-5">
         <p class="mb-0">Copyright © 2024 AnSangPaint | Hotline: 0934 578 080</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
 </body>
 </html>
